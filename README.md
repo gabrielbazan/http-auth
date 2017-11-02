@@ -13,13 +13,13 @@ and adding them to the _AuthenticatorFactory_ class.
 
 The _app.py_ script defines a very simple Flask application 
 with HTTP authentication. You simply use the _@protected_ 
-decorator to protect all the routes you want, as you can see 
+decorator to protect all the routes you need, as you can see 
 in the _/secret_ route. 
 
-The _/tokens_ only implements the 
-_HTTP POST_ method in order to provide an endpoint that 
-allows the user to create tokens. This is specially useful
-for browser clients: When the user enters his credentials, 
+The _/tokens_ endpoint only implements the 
+_HTTP POST_ method in order to allow the user to create 
+tokens. This is specially useful for browser clients: When 
+the user enters his credentials, 
 you simply use _Basic_ auth to obtain the token, which you 
 can store in order to reuse it each time you use the API. As 
 you know, storing the user credentials is a big security 
