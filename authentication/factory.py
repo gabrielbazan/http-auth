@@ -1,5 +1,6 @@
 from basic import Basic
 from token import Token
+from exception import AuthenticationException
 
 
 class AuthenticatorFactory(object):
@@ -14,7 +15,7 @@ class AuthenticatorFactory(object):
         kind = kind.lower()
 
         if kind not in AuthenticatorFactory.strategies:
-            raise NotImplementedError(
+            raise AuthenticationException(
                 'Could not find a strategy for the given credentials'
             )
 

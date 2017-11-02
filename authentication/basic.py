@@ -1,14 +1,19 @@
-from authenticator import Authenticator
 import base64
+import hashlib
+from authenticator import Authenticator
 
 
 class Basic(Authenticator):
 
     def authenticate(self, credentials):
+        user = None
+
         try:
-            username, pwd = base64.b64decode(credentials).split(':')
-            print username, pwd
-            # return User.query.find_by(username=username, password=pwd).one()
-            return 2
+            username, password = base64.b64decode(credentials).split(':')
+            md5 = hashlib.md5(password).hexdigest()
+            # user = User.query.find_by(username=username, password=md5).one().id
+            user = 1
         except:
-            raise Exception('...')
+            pass
+
+        return user

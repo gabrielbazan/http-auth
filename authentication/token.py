@@ -1,6 +1,6 @@
-from authenticator import Authenticator
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature, SignatureExpired
+from authenticator import Authenticator
 
 
 class Token(Authenticator):
@@ -9,17 +9,17 @@ class Token(Authenticator):
     expiration = 600
 
     def authenticate(self, token):
-        s = Serializer(self.secret_key)
+        s = Serializer(Token.secret_key)
+
         try:
             data = s.loads(token)
-        except SignatureExpired:
-            return None  # valid token, but expired
-        except BadSignature:
-            return None  # invalid token
+        except (SignatureExpired, BadSignature):
+            return None
 
-        # return User.query.get(data['id'])
+        # Return the user's identifier
         return data['id']
 
-    def generate(self, user_id):
-        s = Serializer(self.secret_key, expires_in=self.expiration)
+    @staticmethod
+    def generate(user_id):
+        s = Serializer(Token.secret_key, expires_in=Token.expiration)
         return s.dumps({'id': user_id})
