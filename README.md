@@ -3,7 +3,7 @@
 This brief development shows how you could implement multiple
 strategies for HTTP authentication in a Python application.
 
-It is applicable to any HTTP interface implemented in Python,
+It is applicable to any HTTP interface written in Python,
 and includes an implementation for Basic and Token auth. You 
 can add new authentication methods by writing new strategies 
 and adding them to the _AuthenticatorFactory_ class.
